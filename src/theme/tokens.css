@@ -1,0 +1,91 @@
+/*
+ * Pollo Porteño design tokens — three layers (see DESIGN.md).
+ * 1 primitives → 2 semantic roles → 3 component tokens.
+ * `--brand*` and `--font-display` are set at run time from the store's branding.
+ */
+:root {
+  /* 1 · Primitives — Rótulo */
+  --pp-yellow: #F6C21C;
+  --pp-yellow-soft: #FBE7A6;
+  --pp-red: #D7261E;
+  --pp-red-text: #B81E17;
+  --pp-navy: #12385A;
+  --pp-navy-deep: #0B2740;
+  --pp-navy-lift: #1C4A73;
+  --pp-navy-soft: #4A6178;
+  --pp-whitewash: #FFFDF7;
+  --pp-cream: #F7EFD9;
+  --pp-white: #FFFFFF;
+
+  /* 2 · Semantic */
+  --surface: var(--pp-whitewash);
+  --surface-quiet: var(--pp-cream);
+  --surface-raised: var(--pp-white);
+  --surface-deep: var(--pp-navy);
+  --surface-deep-raised: var(--pp-navy-lift);
+  --ink: var(--pp-navy);
+  --ink-soft: var(--pp-navy-soft);
+  --ink-on-deep: var(--pp-whitewash);
+  --ink-on-deep-soft: #C8D6E3;
+  --heading: var(--pp-navy);
+  --rule: rgb(18 56 90 / 0.15);
+  --rule-on-deep: rgb(255 253 247 / 0.22);
+  --accent: var(--brand, var(--pp-navy));
+  --accent-ink: var(--brand-ink, var(--pp-white));
+  --accent-text: var(--brand-text, var(--pp-navy));
+  --accent-2: var(--brand-2, var(--pp-yellow));
+  --accent-2-ink: var(--brand-2-ink, var(--pp-navy));
+  --offer: var(--pp-red-text);
+  --offer-ink: var(--pp-white);
+  --danger: var(--pp-red-text);
+  --success: #2E7D4F;
+  --focus: var(--pp-navy);
+  --focus-on-deep: var(--pp-yellow);
+  --scrim: rgb(8 20 33 / 0.55);
+
+  /* 3 · Component */
+  --font-display: "Lilita One", "Rubik", system-ui, sans-serif;
+  --font-text: "Rubik", "Noto Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius-frame: 1.25rem;
+  --radius-pill: 999px;
+  /* The painted sign: board colour, pinstripe and the letters' navy shadow. */
+  --sign: var(--pp-yellow);
+  --sign-ink: var(--pp-navy);
+  --sign-name: var(--pp-red);
+  --sign-shadow: var(--pp-navy);
+  --board: var(--pp-navy);
+  --board-ink: var(--pp-whitewash);
+  --board-price: var(--pp-yellow);
+  --shadow-soft: 0 1px 2px rgb(18 56 90 / 0.08), 0 12px 26px -16px rgb(18 56 90 / 0.38);
+  --shadow-lift: 0 2px 4px rgb(18 56 90 / 0.1), 0 24px 42px -20px rgb(18 56 90 / 0.5);
+  --tap: 2.75rem;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --max: 74rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.5, 0, 0.75, 0);
+  --dur-enter: 240ms;
+  --dur-exit: 160ms;
+}
+
+/* Night at the port: the sign stays lit, the board blends into the dark. */
+:root[data-color-scheme='dark'] {
+  --surface: #0D1B2A;
+  --surface-quiet: #12263A;
+  --surface-raised: #16293D;
+  --surface-deep: #08131F;
+  --surface-deep-raised: #1C3550;
+  --ink: #F4EFE3;
+  --ink-soft: #B9C6D3;
+  --ink-on-deep: #F4EFE3;
+  --ink-on-deep-soft: #B9C6D3;
+  --heading: #F4EFE3;
+  --rule: rgb(244 239 227 / 0.16);
+  --offer: #FF7A6E;
+  --offer-ink: #0D1B2A;
+  --danger: #FF7A6E;
+  --success: #8ED1A6;
+  --focus: #F6C21C;
+  --board: #08131F;
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 26px -16px rgb(0 0 0 / 0.7);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.45), 0 24px 42px -20px rgb(0 0 0 / 0.8);
+}
