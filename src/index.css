@@ -1,0 +1,356 @@
+@import './core/core.css';
+@import './theme/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-text);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.005em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .on-deep :focus-visible {
+    outline-color: var(--focus-on-deep);
+  }
+
+  .nav-menu :focus-visible {
+    outline-color: var(--focus);
+  }
+
+  ::selection {
+    background: var(--pp-yellow);
+    color: var(--pp-navy);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  .page {
+    width: 100%;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: var(--tap);
+    padding: 0.625rem 1.375rem;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: transform var(--dur-exit) var(--ease-out), background-color var(--dur-exit) ease, box-shadow var(--dur-exit) ease;
+  }
+
+  .btn:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .btn-accent {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .btn-accent:hover:not(:disabled) {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  .btn-strong {
+    background: var(--heading);
+    color: var(--surface);
+  }
+
+  .btn-strong:hover:not(:disabled) {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--heading) 18%, transparent);
+  }
+
+  .btn-quiet {
+    background: var(--surface-raised);
+    color: var(--heading);
+    box-shadow: inset 0 0 0 2px var(--rule);
+  }
+
+  .btn-quiet:hover:not(:disabled) {
+    box-shadow: inset 0 0 0 2px var(--heading);
+  }
+
+  /* On the yellow sign: navy outline, like a second painted line. */
+  .btn-sign {
+    background: transparent;
+    color: var(--sign-ink);
+    box-shadow: inset 0 0 0 2.5px var(--sign-ink);
+  }
+
+  .btn-sign:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--sign-ink) 8%, transparent);
+  }
+
+  .btn-yellow {
+    background: var(--pp-yellow);
+    color: var(--pp-navy);
+  }
+
+  .btn-yellow:hover:not(:disabled) {
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--pp-yellow) 35%, transparent);
+  }
+
+  .icon-btn {
+    display: inline-grid;
+    place-items: center;
+    min-width: var(--tap);
+    min-height: var(--tap);
+    border-radius: var(--radius-pill);
+  }
+
+  .gloss {
+    display: none;
+  }
+
+  .frame {
+    border-radius: var(--radius-frame);
+    overflow: hidden;
+  }
+
+  .field {
+    width: 100%;
+    min-height: var(--tap);
+    padding: 0.625rem 1rem;
+    border-radius: 0.875rem;
+    background: var(--surface-raised);
+    color: var(--ink);
+    box-shadow: inset 0 0 0 2px var(--rule);
+    font: inherit;
+  }
+
+  .field[aria-invalid='true'] {
+    box-shadow: inset 0 0 0 2px var(--danger);
+  }
+
+  .skeleton {
+    background: linear-gradient(100deg, var(--surface-quiet) 30%, var(--surface-raised) 50%, var(--surface-quiet) 70%);
+    background-size: 300% 100%;
+    animation: skeleton-sweep 1.5s ease-in-out infinite;
+    border-radius: 0.875rem;
+  }
+
+  .skeleton-deep {
+    background: var(--surface-deep-raised);
+    border-radius: 0.875rem;
+  }
+
+  .price-tag {
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.01em;
+    color: var(--heading);
+  }
+
+  /* The hand-painted sign: yellow board, two navy pinstripes, rounded corners. */
+  .sign {
+    /* The sign stays yellow at night, so it keeps its own ink. */
+    --heading: var(--sign-ink);
+    --ink: var(--sign-ink);
+    --ink-soft: var(--pp-navy-soft);
+    position: relative;
+    border-radius: 1.75rem;
+    background: var(--sign);
+    color: var(--sign-ink);
+    box-shadow:
+      inset 0 0 0 6px var(--sign-ink),
+      inset 0 0 0 11px var(--sign),
+      inset 0 0 0 13px var(--sign-ink),
+      var(--shadow-lift);
+  }
+
+  /* Sign-painter letters: red with a navy offset shadow. */
+  .sign-name {
+    color: var(--sign-name);
+    text-shadow: 0.06em 0.06em 0 var(--sign-shadow);
+  }
+
+  /* The menu board: navy, a thin yellow pinstripe inside the edge. */
+  .board {
+    border-radius: var(--radius-frame);
+    background: var(--board);
+    color: var(--board-ink);
+    box-shadow: inset 0 0 0 4px var(--board), inset 0 0 0 6px color-mix(in srgb, var(--pp-yellow) 70%, transparent);
+  }
+
+  .board .price-tag {
+    color: var(--board-price);
+  }
+
+  .board .text-ink-soft {
+    color: var(--ink-on-deep-soft);
+  }
+
+  /* Struck-through prices need a lighter red on the navy board. */
+  .board .text-offer {
+    color: #FF9D94;
+  }
+
+  /* Dots that lead from a dish to its price. */
+  .leader {
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    margin-inline: 0.5rem;
+    border-bottom: 2px dotted color-mix(in srgb, currentColor 45%, transparent);
+    transform: translateY(-0.3em);
+  }
+
+  /* A ship's porthole: the round photo, a navy ring and brass rivets. */
+  .porthole {
+    position: relative;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px var(--pp-navy), 0 0 0 14px var(--pp-yellow), var(--shadow-lift);
+  }
+}
+
+.nav-link {
+  position: relative;
+}
+
+/* The current page gets a painted yellow underline. */
+.nav-link[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  left: 0.875rem;
+  right: 0.875rem;
+  bottom: 0.3rem;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--pp-yellow);
+  box-shadow: 0 1px 0 var(--pp-navy);
+}
+
+/* The flame by the sign's name flickers a few times when the page opens. */
+.flame {
+  transform-origin: 50% 92%;
+  animation: flicker 0.55s ease-in-out 7 alternate both;
+}
+
+@keyframes flicker {
+  0% {
+    transform: scale(1, 1) rotate(-2deg);
+  }
+  50% {
+    transform: scale(0.94, 1.08) rotate(2deg);
+  }
+  100% {
+    transform: scale(1.03, 0.96) rotate(-1deg);
+  }
+}
+
+/* The bag hops when a dish lands in it. */
+.basket-settle {
+  animation: hop 460ms var(--ease-out);
+}
+
+@keyframes hop {
+  0% {
+    transform: translateY(-6px);
+  }
+  55% {
+    transform: translateY(1px);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@keyframes skeleton-sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes sheet-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sheet-in-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.overlay[data-state='open'],
+.nav-menu[data-state='open'] {
+  animation: fade-in var(--dur-enter) ease;
+}
+
+.sheet[data-state='open'] {
+  animation: sheet-in-up var(--dur-enter) var(--ease-out);
+}
+
+@media (min-width: 768px) {
+  .sheet[data-state='open'] {
+    animation-name: sheet-in-right;
+  }
+}
+
+.dialog-pop[data-state='open'] {
+  animation: fade-in var(--dur-enter) var(--ease-out);
+}
